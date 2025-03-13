@@ -21,17 +21,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(1)->create();
 
-        // User::factory()->create([
-        //     'name' => "Mehedi hasan",
-        //     'email' => "mehedihasanmondol.online@gmail.com",
-        //     'email_verified_at' => now(),
-        //     'password' => Hash::make('12345678'),
-        //     'remember_token' => Str::random(10),
-        //     'mobile' => '01779282747',
-        //     'status' => 'active',
-        // ]);
+        if(User::all()->count() > 0) {
+            User::factory(1)->create();
+
+        }
+        else{
+            User::factory()->create([
+                'name' => "Mehedi hasan",
+                'email' => "mehedihasanmondol.online@gmail.com",
+                'email_verified_at' => now(),
+                'password' => Hash::make('12345678'),
+                'remember_token' => Str::random(10),
+                'mobile' => '01779282747',
+                'status' => 'active',
+            ]);
+
+        }
 
         Client::factory(3)->create();
         Bank::factory(3)->create();

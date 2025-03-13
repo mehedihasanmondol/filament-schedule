@@ -22,7 +22,10 @@ return new class extends Migration
 
             $table->string('mobile');
             $table->enum('status', ['active', 'inactive']);
-
+            $table->date('birth_date');  // You can store the birth date as a string or date
+            $table->decimal('rate', 8, 2);  // If rate is a numeric field
+            $table->text('remarks')->nullable();
+            $table->string('image')->nullable();  // To store the file path of the uploaded image
         });
 
 

@@ -32,12 +32,31 @@ class UserResource extends Resource
                     ->unique(ignoreRecord: true),
                 Forms\Components\TextInput::make('mobile')
                     ->required(),
+                Forms\Components\TextInput::make('password')
+                    ->password(),
+
+                Forms\Components\TextInput::make('birth_date')
+                    ->mask('9999/99/99')
+                    ->placeholder('YYYY/MM/DD'),
+                Forms\Components\FileUpload::make('image')
+                    ->image()
+                    ->nullable(),
+
+                Forms\Components\TextInput::make('rate')
+                ->numeric(),
+                Forms\Components\TextInput::make('remarks'),
                 Forms\Components\Select::make('status')
                     ->options([
                         'active' => 'Active',
                         'inactive' => 'Inactive',
                     ])
                     ->required(),
+
+
+
+
+
+
             ]);
     }
 
@@ -45,9 +64,11 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id')->sortable()->searchable(),
+                Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('mobile'),
+                Tables\Columns\TextColumn::make('mobile')->label('Number')->searchable(),
                 Tables\Columns\BadgeColumn::make('status')
                     ->colors([
                         'active' => 'success',
