@@ -45,7 +45,7 @@ class TimeOffResource extends Resource
                 Tables\Columns\TextColumn::make('start_date')->sortable(),
                 Tables\Columns\TextColumn::make('end_date')->sortable(),
                 Tables\Columns\TextColumn::make('leaveType.name')->sortable(),
-                Tables\Columns\BadgeColumn::make('status.name')->colors([
+                Tables\Columns\BadgeColumn::make('leaveStatus.name')->colors([
                     'Pending' => 'warning',
                     'Approved' => 'success',
                     'Rejected' => 'danger',

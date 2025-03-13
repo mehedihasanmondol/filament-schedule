@@ -20,9 +20,11 @@ class ComplianceResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('compliance_type_id')
-                    ->relationship('complianceType', 'name')
                     ->searchable()
-                    ->required(),
+                    ->required()
+                    ->options(fn () => ComplianceTypeResource::getComplianceTypeOptions()) // Load first 10 banks
+                    ->getSearchResultsUsing(fn (string $search) => ComplianceTypeResource::getComplianceTypeOptions($search)), // Dynamic search
+
                 Forms\Components\TextInput::make('certificate_number')->required(),
                 Forms\Components\DatePicker::make('expire_date')->required(),
             ]);

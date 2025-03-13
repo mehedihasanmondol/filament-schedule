@@ -58,4 +58,18 @@ class SiteResource extends Resource
             'edit' => EditSite::route('/{record}/edit'),
         ];
     }
+    public static function getSiteOptions($search = null): array
+    {
+        // Apply search condition only if the search term is provided
+        $query = Site::query();
+
+        if ($search) {
+            $query->where('name', 'like', "%{$search}%");
+        }
+
+        // Fetch up to 10 results regardless of search, but apply the search filter if it exists
+        return $query->limit(10)
+            ->pluck('name', 'id')
+            ->toArray();
+    }
 }

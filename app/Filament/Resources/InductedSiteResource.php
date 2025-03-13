@@ -20,10 +20,12 @@ class InductedSiteResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('site_id')
-                    ->relationship('site', 'name')
                     ->searchable()
-                    ->required(),
-                Forms\Components\DatePicker::make('induction_date')->required(),
+                    ->required()
+                    ->options(fn () => SiteResource::getSiteOptions()) // Load first 10 banks
+                    ->getSearchResultsUsing(fn (string $search) => SiteResource::getSiteOptions($search)), // Dynamic search
+
+                    Forms\Components\DatePicker::make('induction_date')->required(),
                 Forms\Components\Textarea::make('remarks')->nullable(),
             ]);
     }
@@ -49,4 +51,5 @@ class InductedSiteResource extends Resource
             'edit' => EditInductedSite::route('/{record}/edit'),
         ];
     }
+
 }
