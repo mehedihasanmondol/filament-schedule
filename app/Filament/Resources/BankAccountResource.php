@@ -16,6 +16,10 @@ class BankAccountResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false; // Hides the resource from the menu
+    }
     public static function form(Forms\Form $form): Forms\Form
     {
         return $form
@@ -24,7 +28,9 @@ class BankAccountResource extends Resource
                 Forms\Components\Select::make('bank_id')
                     ->relationship('bank', 'name')
                     ->searchable()
-                    ->required(),
+                    ->required()
+                    ->options(fn () => BankResource::getBankOptions()) // Load first 10 banks
+                    ->preload(), // Preload initial options,
                 Forms\Components\TextInput::make('bsb')->required(),
                 Forms\Components\TextInput::make('account_number')->required(),
             ]);
