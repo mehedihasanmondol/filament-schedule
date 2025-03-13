@@ -26,12 +26,12 @@ class BankAccountResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('account_name')->required(),
                 Forms\Components\Select::make('bank_id')
-                    ->relationship('bank', 'name')
                     ->searchable()
                     ->required()
                     ->options(fn () => BankResource::getBankOptions()) // Load first 10 banks
-                    ->preload(), // Preload initial options,
-                Forms\Components\TextInput::make('bsb')->required(),
+                    ->getSearchResultsUsing(fn (string $search) => BankResource::getBankOptions($search)), // Dynamic search
+
+                    Forms\Components\TextInput::make('bsb')->required(),
                 Forms\Components\TextInput::make('account_number')->required(),
             ]);
     }

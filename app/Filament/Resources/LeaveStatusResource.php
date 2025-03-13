@@ -46,4 +46,20 @@ class LeaveStatusResource extends Resource
             'edit' => EditLeaveStatus::route('/{record}/edit'),
         ];
     }
+
+    public static function getLeaveStatusOptions($search = null): array
+    {
+        // Apply search condition only if the search term is provided
+        $query = LeaveStatus::query();
+
+        if ($search) {
+            $query->where('name', 'like', "%{$search}%");
+        }
+
+        // Fetch up to 10 results regardless of search, but apply the search filter if it exists
+        return $query->limit(10)
+            ->pluck('name', 'id')
+            ->toArray();
+    }
+
 }

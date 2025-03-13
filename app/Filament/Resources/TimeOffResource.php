@@ -23,13 +23,17 @@ class TimeOffResource extends Resource
                 Forms\Components\DatePicker::make('start_date')->required(),
                 Forms\Components\DatePicker::make('end_date')->required(),
                 Forms\Components\Select::make('leave_type_id')
-                    ->relationship('leaveType', 'name')
                     ->searchable()
-                    ->required(),
+                    ->required()
+                    ->options(fn () => LeaveTypeResource::getLeaveTypeOptions()) // Load first 10 banks
+                    ->getSearchResultsUsing(fn (string $search) => LeaveTypeResource::getLeaveTypeOptions($search)), // Dynamic search
+
                 Forms\Components\Select::make('status_id')
-                    ->relationship('status', 'name')
                     ->searchable()
-                    ->required(),
+                    ->required()
+                    ->options(fn () => LeaveStatusResource::getLeaveStatusOptions()) // Load first 10 banks
+                    ->getSearchResultsUsing(fn (string $search) => LeaveStatusResource::getLeaveStatusOptions($search)), // Dynamic search
+
                 Forms\Components\Textarea::make('remarks')->nullable(),
             ]);
     }
