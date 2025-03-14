@@ -7,8 +7,10 @@ use App\Models\Client;
 use App\Models\ComplianceType;
 use App\Models\LeaveStatus;
 use App\Models\LeaveType;
+use App\Models\RolePermission;
 use App\Models\Site;
 use App\Models\User;
+use Database\Factories\RolePermissionFactory;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -45,5 +47,6 @@ class DatabaseSeeder extends Seeder
         LeaveStatus::factory(3)->create();
         LeaveType::factory(3)->create();
         Site::factory(3)->create();
+        RolePermission::factory(3)->create();
     }
 }

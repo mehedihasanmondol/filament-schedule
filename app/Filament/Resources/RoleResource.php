@@ -4,6 +4,8 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\RoleResource\Pages\CreateRole;
 use App\Filament\Resources\RoleResource\Pages\EditRole;
 use App\Filament\Resources\RoleResource\Pages\ListRoles;
+use App\Filament\Resources\RoleResource\RelationManagers\PermissionsRelationManager;
+use App\Filament\Resources\RoleResource\RelationManagers\RolePermissionsRelationManager;
 use App\Models\Role;
 use Filament\Forms;
 use Filament\Resources\Resource;
@@ -51,6 +53,12 @@ class RoleResource extends Resource
             'index' => ListRoles::route('/'),
             'create' => CreateRole::route('/create'),
             'edit' => EditRole::route('/{record}/edit'),
+        ];
+    }
+    public static function getRelations(): array
+    {
+        return [
+            // RolePermissionsRelationManager::class,
         ];
     }
 
