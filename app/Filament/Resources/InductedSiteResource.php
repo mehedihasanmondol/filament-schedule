@@ -14,7 +14,10 @@ class InductedSiteResource extends Resource
 {
     protected static ?string $model = InductedSite::class;
     protected static ?string $navigationIcon = 'heroicon-o-map';
-
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false; // Hides the resource from the menu
+    }
     public static function form(Forms\Form $form): Forms\Form
     {
         return $form

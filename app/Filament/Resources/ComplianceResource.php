@@ -14,6 +14,10 @@ class ComplianceResource extends Resource
 {
     protected static ?string $model = Compliance::class;
     protected static ?string $navigationIcon = 'heroicon-o-shield-check';
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false; // Hides the resource from the menu
+    }
 
     public static function form(Forms\Form $form): Forms\Form
     {

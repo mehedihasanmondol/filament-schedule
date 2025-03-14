@@ -15,6 +15,10 @@ class TimeOffResource extends Resource
     protected static ?string $model = TimeOff::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-clock';
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false; // Hides the resource from the menu
+    }
 
     public static function form(Forms\Form $form): Forms\Form
     {

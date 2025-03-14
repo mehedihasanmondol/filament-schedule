@@ -7,7 +7,9 @@ use App\Filament\Resources\UserResource\RelationManagers;
 use App\Filament\Resources\UserResource\RelationManagers\BankAccountsRelationManager;
 use App\Filament\Resources\UserResource\RelationManagers\CompliancesRelationManager;
 use App\Filament\Resources\UserResource\RelationManagers\InductedSitesRelationManager;
+use App\Filament\Resources\UserResource\RelationManagers\RolesRelationManager;
 use App\Filament\Resources\UserResource\RelationManagers\TimeOffsRelationManager;
+use App\Filament\Resources\UserResource\RelationManagers\UserRolesRelationManager;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -91,6 +93,7 @@ class UserResource extends Resource
             TimeOffsRelationManager::class,
             InductedSitesRelationManager::class,
             CompliancesRelationManager::class,
+            UserRolesRelationManager::class,
         ];
     }
 

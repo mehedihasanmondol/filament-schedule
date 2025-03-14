@@ -23,10 +23,7 @@ class RoleResource extends Resource
                     ->unique(ignoreRecord: true)
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Select::make('permissions')
-                    ->relationship('permissions', 'name')
-                    ->multiple()
-                    ->searchable(),
+                Forms\Components\Textarea::make('remarks')->nullable(),
             ]);
     }
 
@@ -37,9 +34,7 @@ class RoleResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('permissions.name')
-                    ->badge()
-                    ->label('Permissions'),
+                Tables\Columns\TextColumn::make('remarks'),
             ])
             ->filters([])
             ->actions([
@@ -57,5 +52,20 @@ class RoleResource extends Resource
             'create' => CreateRole::route('/create'),
             'edit' => EditRole::route('/{record}/edit'),
         ];
+    }
+
+    public static function getRoleOptions($search = null): array
+    {
+        // Apply search condition only if the search term is provided
+        $query = Role::query();
+
+        if ($search) {
+            $query->where('name', 'like', "%{$search}%");
+        }
+
+        // Fetch up to 10 results regardless of search, but apply the search filter if it exists
+        return $query->limit(10)
+            ->pluck('name', 'id')
+            ->toArray();
     }
 }

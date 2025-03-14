@@ -53,9 +53,14 @@ class User extends Authenticatable
         ];
     }
 
+    public function userRoles()
+    {
+        return $this->hasMany(UserRole::class);
+    }
+
     public function roles()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class, 'user_roles');
     }
 
     public function bankAccounts()

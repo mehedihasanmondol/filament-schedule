@@ -13,7 +13,7 @@ use Filament\Resources\Pages\{ListRecords, CreateRecord, EditRecord};
 class ComplianceTypeResource extends Resource
 {
     protected static ?string $model = ComplianceType::class;
-    // protected static ?string $navigationIcon = 'heroicon-o-clipboard-check';
+    protected static ?string $navigationIcon = 'heroicon-o-shield-check';
 
     public static function form(Forms\Form $form): Forms\Form
     {
