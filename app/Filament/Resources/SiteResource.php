@@ -21,7 +21,7 @@ class SiteResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')->required(),
                 Forms\Components\TextInput::make('contact_name')->required(),
-                Forms\Components\TextInput::make('number')->required(),
+                Forms\Components\TextInput::make('contact_number')->required(),
                 Forms\Components\Select::make('client_id')
                     ->relationship('client', 'name')
                     ->searchable()
@@ -38,7 +38,7 @@ class SiteResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('contact_name'),
-                Tables\Columns\TextColumn::make('number'),
+                Tables\Columns\TextColumn::make('contact_number'),
                 Tables\Columns\TextColumn::make('client.name'),
                 Tables\Columns\BadgeColumn::make('status')->colors([
                     'active' => 'success',

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Client;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,7 +24,7 @@ class ClientFactory extends Factory
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'contact_person' => $this->faker->name(),
-            'number' => $this->faker->name(),
+            'number' => preg_replace('/[^0-9]/', '', $this->faker->phoneNumber()),
 
         ];
     }

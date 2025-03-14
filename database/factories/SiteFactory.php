@@ -20,7 +20,7 @@ class SiteFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'contact_name' => $this->faker->name(),
-            'contact_number' => Str::random(11),
+            'contact_number' => preg_replace('/[^0-9]/', '', $this->faker->phoneNumber()),
             'client_id' => Client::factory(),
             'status' => ['active', 'inactive'][rand(0, 1)],
         ];
