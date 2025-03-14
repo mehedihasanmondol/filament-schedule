@@ -53,8 +53,8 @@ class TimeLogResource extends Resource
                 TextColumn::make('shift_start')->label('Start Time')->dateTime('h:i A'),
                 TextColumn::make('shift_end')->label('End Time')->dateTime('h:i A'),
                 TextColumn::make('hours_worked')->label('Total hours')->sortable(),
-                TextColumn::make('hourly_rate')->label('Hourly Rate')->sortable()->money('USD'),
-                TextColumn::make('total_payable')->label('Total Payable')->money('USD'),
+                TextColumn::make('hourly_rate')->label('Hourly Rate')->sortable()->money(get_site_setting('currency','USD')),
+                TextColumn::make('total_payable')->label('Total Payable')->money(get_site_setting('currency','USD')),
             ])
             ->filters([
                 SelectFilter::make('site_id')
