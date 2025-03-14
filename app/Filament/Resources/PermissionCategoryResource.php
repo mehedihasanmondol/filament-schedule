@@ -72,18 +72,19 @@ class PermissionCategoryResource extends Resource
         ];
     }
 
-    public static function getPermissionCategoryOptions($search = null): array
+    public static function getPermissionCategoryOptions($search = null, $limit = null): array
     {
-        // Apply search condition only if the search term is provided
         $query = PermissionCategory::query();
 
         if ($search) {
             $query->where('name', 'like', "%{$search}%");
         }
 
-        // Fetch up to 10 results regardless of search, but apply the search filter if it exists
-        return $query->limit(10)
-            ->pluck('name', 'id')
+        if ($limit) {
+            $query->limit($limit);
+        }
+
+        return $query->pluck('name', 'id')
             ->toArray();
     }
 }

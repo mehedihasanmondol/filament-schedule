@@ -34,6 +34,7 @@ class EditRole extends EditRecord
                             $sections[] = Section::make($categoryName)
                                 ->schema([
                                     CheckboxList::make("permissions_{$categoryId}") // Unique field name for each section
+                                        ->label("")
                                         ->relationship('permissions', 'name',
                                             modifyQueryUsing: fn (Builder $query) => $query->where("category_id", $categoryId)
                                         )
