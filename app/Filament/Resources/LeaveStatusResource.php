@@ -13,7 +13,7 @@ use Filament\Resources\Pages\{ListRecords, CreateRecord, EditRecord};
 class LeaveStatusResource extends Resource
 {
     protected static ?string $model = LeaveStatus::class;
-    // protected static ?string $navigationIcon = 'heroicon-o-badge-check';
+    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-check';
 
     public static function form(Forms\Form $form): Forms\Form
     {

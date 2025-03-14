@@ -13,7 +13,7 @@ use Filament\Resources\Pages\{ListRecords, CreateRecord, EditRecord};
 class SiteResource extends Resource
 {
     protected static ?string $model = Site::class;
-    // protected static ?string $navigationIcon = 'heroicon-o-office-building';
+    protected static ?string $navigationIcon = 'heroicon-o-building-office';
 
     public static function form(Forms\Form $form): Forms\Form
     {

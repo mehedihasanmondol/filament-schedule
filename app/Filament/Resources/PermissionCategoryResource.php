@@ -2,16 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PermissionCategoryResource\Pages;
-use App\Filament\Resources\PermissionCategoryResource\RelationManagers;
-use App\Models\PermissionCategory;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
+use Filament\Resources\Resource;
+use App\Models\PermissionCategory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\PermissionCategoryResource\Pages;
+use App\Filament\Resources\PermissionCategoryResource\RelationManagers;
 
 class PermissionCategoryResource extends Resource
 {
@@ -22,7 +23,15 @@ class PermissionCategoryResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
-            Forms\Components\TextInput::make('name')->required()->unique()->label('Category Name'),
+            Forms\Components\TextInput::make('name')->required()->unique()->label('Category Name')
+            ->live(onBlur:true) // Make this field reactive to trigger changes on the slug field
+                ->afterStateUpdated(function ($operation, $state, callable $set) {
+                    if ($operation === 'edit') return; // Skip if the operation is edit
+
+                    // Automatically generate the slug from the name
+                    $slug = Str::slug($state);
+                    $set('slug', $slug); // Set the slug field
+                }),
             Forms\Components\TextInput::make('slug')->required()->unique()->label('Slug'),
         ]);
     }

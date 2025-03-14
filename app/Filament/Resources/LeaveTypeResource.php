@@ -14,7 +14,7 @@ class LeaveTypeResource extends Resource
 {
     protected static ?string $model = LeaveType::class;
 
-    // protected static ?string $navigationIcon = 'heroicon-o-clipboard-check';
+    protected static ?string $navigationIcon = 'heroicon-o-table-cells';
 
     public static function form(Forms\Form $form): Forms\Form
     {

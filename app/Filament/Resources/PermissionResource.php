@@ -31,8 +31,10 @@ class PermissionResource extends Resource
                 TextInput::make('name')
                 ->required()
                 ->label('Permission Name')
-                ->reactive() // Make this field reactive to trigger changes on the slug field
-                ->afterStateUpdated(function ($state, callable $set) {
+                ->live(onBlur:true) // Make this field reactive to trigger changes on the slug field
+                ->afterStateUpdated(function ($operation, $state, callable $set) {
+                    if ($operation === 'edit') return; // Skip if the operation is edit
+
                     // Automatically generate the slug from the name
                     $slug = Str::slug($state);
                     $set('slug', $slug); // Set the slug field
