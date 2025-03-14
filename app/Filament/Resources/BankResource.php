@@ -15,6 +15,7 @@ class BankResource extends Resource
     protected static ?string $model = Bank::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
+    protected static ?string $navigationGroup = 'Settings';
 
     public static function form(Forms\Form $form): Forms\Form
     {

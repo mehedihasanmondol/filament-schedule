@@ -14,6 +14,7 @@ class ComplianceTypeResource extends Resource
 {
     protected static ?string $model = ComplianceType::class;
     protected static ?string $navigationIcon = 'heroicon-o-shield-check';
+    protected static ?string $navigationGroup = 'Settings';
 
     public static function form(Forms\Form $form): Forms\Form
     {
