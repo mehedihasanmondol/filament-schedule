@@ -105,6 +105,7 @@ class TimeLogResource extends Resource
             'index' => Pages\ListTimeLogs::route('/'),
             'create' => Pages\CreateTimeLog::route('/create'),
             'edit' => Pages\EditTimeLog::route('/{record}/edit'),
+            'timesheet' => Pages\TimesheetReport::route('/timesheet-report'),
 
         ];
     }

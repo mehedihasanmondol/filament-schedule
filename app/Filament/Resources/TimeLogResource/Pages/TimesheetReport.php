@@ -1,34 +1,28 @@
 <?php
 
-namespace App\Filament\Pages\Settings;
+namespace App\Filament\Resources\TimeLogResource\Pages;
 
-use Filament\Tables\Table;
-use Filament\Pages\Page;
-use Filament\Tables\Concerns\InteractsWithTable;
-use Filament\Tables\Columns\TextColumn;
 use App\Models\TimeLog;
+use Filament\Tables\Table;
+use Filament\Resources\Pages\Page;
+use Filament\Tables\Columns\TextColumn;
+use App\Filament\Resources\TimeLogResource;
+use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\Tables\Contracts\HasTable;
 use Illuminate\Database\Eloquent\Model;
-
-class TimesheetReport extends Page implements \Filament\Tables\Contracts\HasTable
+class TimesheetReport extends Page implements HasTable
 {
     use InteractsWithTable;
-    protected static ?string $slug = 'time-logs/timesheet-report';
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
-    // protected static ?string $navigationGroup = 'Settings';
-
-    protected static ?int $navigationSort = 3;
-
-    protected static ?string $navigationLabel = 'Timesheet Report';
+    protected static string $resource = TimeLogResource::class;
 
     protected static string $view = 'filament.resources.time-log-resource.pages.timesheet-report';
-// protected static ?string $navigationParentItem = 'Time logs';
-    protected static ?string $navigationGroup = 'Time Management';
+
+
     public function getTableRecordKey(Model $record): string
     {
         return $record->user_id;
     }
-
     public function table(Table $table): Table
     {
         return $table
