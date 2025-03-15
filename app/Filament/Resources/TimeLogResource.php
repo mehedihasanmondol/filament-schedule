@@ -7,9 +7,11 @@ use Filament\Tables;
 use App\Models\TimeLog;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Illuminate\Support\Carbon;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TimePicker;
@@ -27,6 +29,9 @@ class TimeLogResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $isModal = $form->getExtraAttributeBag()->get("modal",false); // Retrieve the passed attribute
+
+
         return $form->schema([
             Select::make('user_id')
                 ->relationship('user', 'name')
@@ -36,12 +41,25 @@ class TimeLogResource extends Resource
                 ->relationship('site', 'name')
                 ->required()
                 ->label('Site'),
-            DatePicker::make('date')->required(),
+            DatePicker::make('date')->required()->visible(!$isModal),
+
+            DatePicker::make('start_date')
+                ->required()
+                ->label('Start Date')
+                ->visible($isModal),
+            DatePicker::make('end_date')
+                ->required()
+                ->label('End Date')
+                ->afterOrEqual('start_date')
+                ->visible($isModal),
+
+
             TimePicker::make('shift_start')->required(),
             TimePicker::make('shift_end')->required(),
             TextInput::make('hourly_rate')->numeric()->required(),
-        ]);
+        ])->columns(2);
     }
+
 
     public static function table(Table $table): Table
     {
