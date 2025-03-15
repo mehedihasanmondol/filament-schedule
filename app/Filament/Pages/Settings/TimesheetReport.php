@@ -12,9 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 class TimesheetReport extends Page implements \Filament\Tables\Contracts\HasTable
 {
     use InteractsWithTable;
-
-    protected static ?string $slug = 'settings/timesheet-report';
-
+    protected static ?string $slug = 'time-logs/timesheet-report';
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
     // protected static ?string $navigationGroup = 'Settings';
@@ -23,8 +21,9 @@ class TimesheetReport extends Page implements \Filament\Tables\Contracts\HasTabl
 
     protected static ?string $navigationLabel = 'Timesheet Report';
 
-    protected static string $view = 'filament.pages.settings.timesheet-report';
-
+    protected static string $view = 'filament.resources.time-log-resource.pages.timesheet-report';
+// protected static ?string $navigationParentItem = 'Time logs';
+    protected static ?string $navigationGroup = 'Time Management';
     public function getTableRecordKey(Model $record): string
     {
         return $record->user_id;

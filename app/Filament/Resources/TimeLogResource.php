@@ -27,26 +27,8 @@ class TimeLogResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-clock';
 
-    // protected static ?string $navigationGroup = 'Time Management';
-
-    // public static function getNavigationItems(): array
-    // {
-    //     return [
-    //         \Filament\Navigation\NavigationItem::make()
-    //             ->group(static::getNavigationGroup())
-    //             ->icon(static::getNavigationIcon())
-    //             ->label(static::getModelLabel())
-    //             ->badge(static::getNavigationBadge())
-    //             ->sort(static::getNavigationSort()),
-
-    //         \Filament\Navigation\NavigationItem::make()
-    //             ->group(static::getNavigationGroup())
-    //             ->icon('heroicon-o-document-text')
-    //             ->label('Timesheet Report')
-    //             ->url(static::getUrl('timesheet'))
-    //             ->sort(static::getNavigationSort() + 1),
-    //     ];
-    // }
+    protected static ?string $navigationGroup = 'Time Management';
+    // protected static ?string $title = 'Time logs';
 
     public static function form(Form $form): Form
     {
@@ -123,7 +105,7 @@ class TimeLogResource extends Resource
             'index' => Pages\ListTimeLogs::route('/'),
             'create' => Pages\CreateTimeLog::route('/create'),
             'edit' => Pages\EditTimeLog::route('/{record}/edit'),
-            'timesheet' => Pages\TimesheetReport::route('/timesheet'),
+
         ];
     }
 }
